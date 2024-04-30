@@ -15,16 +15,16 @@ public sealed class SwitchSocketSync(IWirelessConnectionConfig cfg) : SwitchSock
 {
     public override void Connect()
     {
-        Log("Connecting to device...");
+        Log("Verbinden mit Gerät...");
         IAsyncResult result = Connection.BeginConnect(Info.IP, Info.Port, null, null);
         bool success = result.AsyncWaitHandle.WaitOne(5000, true);
         if (!success || !Connection.Connected)
         {
             InitializeSocket();
-            throw new Exception("Failed to connect to device.");
+            throw new Exception("Die Verbindung zum Gerät konnte nicht hergestellt werden.");
         }
         Connection.EndConnect(result);
-        Log("Connected!");
+        Log("Verbunden!");
         Label = Name;
     }
 
@@ -39,16 +39,16 @@ public sealed class SwitchSocketSync(IWirelessConnectionConfig cfg) : SwitchSock
 
     public override void Disconnect()
     {
-        Log("Disconnecting from device...");
+        Log("Trennen der Verbindung zum Gerät...");
         IAsyncResult result = Connection.BeginDisconnect(false, null, null);
         bool success = result.AsyncWaitHandle.WaitOne(5000, true);
         if (!success || Connection.Connected)
         {
             InitializeSocket();
-            throw new Exception("Failed to disconnect from device.");
+            throw new Exception("Die Verbindung zum Gerät konnte nicht getrennt werden.");
         }
         Connection.EndDisconnect(result);
-        Log("Disconnected!");
+        Log("Getrennt!");
         InitializeSocket();
     }
 

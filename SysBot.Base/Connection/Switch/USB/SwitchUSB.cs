@@ -47,9 +47,9 @@ public abstract class SwitchUSB : IConsoleConnection
     {
         SwDevice = TryFindUSB();
         if (SwDevice == null)
-            throw new Exception("USB device not found.");
+            throw new Exception("USB-Gerät nicht gefunden");
         if (SwDevice is not IUsbDevice usb)
-            throw new Exception("Device is using a WinUSB driver. Use libusbK and create a filter.");
+            throw new Exception("Das Gerät verwendet einen WinUSB-Treiber. Verwenden Sie libusbK und erstellen Sie einen Filter.");
 
         lock (_sync)
         {
@@ -150,7 +150,7 @@ public abstract class SwitchUSB : IConsoleConnection
         lock (_sync)
         {
             if (reader == null)
-                throw new Exception("USB device not found or not connected.");
+                throw new Exception("USB-Gerät nicht gefunden oder nicht angeschlossen.");
 
             // Let usb-botbase tell us the response size.
             byte[] sizeOfReturn = new byte[4];
@@ -198,7 +198,7 @@ public abstract class SwitchUSB : IConsoleConnection
     {
         byte[] sizeOfReturn = new byte[4];
         if (reader == null)
-            throw new Exception("USB device not found or not connected.");
+            throw new Exception("USB-Gerät nicht gefunden oder nicht angeschlossen.");
 
         reader.Read(sizeOfReturn, 5000, out _);
         reader.Read(buffer, 5000, out var lenVal);
@@ -208,7 +208,7 @@ public abstract class SwitchUSB : IConsoleConnection
     private int SendInternal(byte[] buffer)
     {
         if (writer == null)
-            throw new Exception("USB device not found or not connected.");
+            throw new Exception("USB-Gerät nicht gefunden oder nicht angeschlossen.");
 
         uint pack = (uint)buffer.Length + 2;
         var ec = writer.Write(BitConverter.GetBytes(pack), 2000, out _);

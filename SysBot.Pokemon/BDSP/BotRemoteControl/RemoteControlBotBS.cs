@@ -1,4 +1,4 @@
-﻿using SysBot.Base;
+using SysBot.Base;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,10 +11,10 @@ public class RemoteControlBotBS(PokeBotState Config) : PokeRoutineExecutor8BS(Co
     {
         try
         {
-            Log("Identifying trainer data of the host console.");
+            Log("Identifizierung der Trainerdaten der Host-Konsole.");
             await IdentifyTrainer(token).ConfigureAwait(false);
 
-            Log("Starting main loop, then waiting for commands.");
+            Log("Start der Hauptschleife, dann Warten auf Befehle.");
             Config.IterateNextRoutine();
             while (!token.IsCancellationRequested)
             {
@@ -27,7 +27,7 @@ public class RemoteControlBotBS(PokeBotState Config) : PokeRoutineExecutor8BS(Co
             Log(e.Message);
         }
 
-        Log($"Ending {nameof(RemoteControlBotBS)} loop.");
+        Log($"Beenden der {nameof(RemoteControlBotBS)}-Schleife.");
         await HardStop().ConfigureAwait(false);
     }
 

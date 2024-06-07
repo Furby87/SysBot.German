@@ -1,4 +1,4 @@
-using Discord;
+﻿using Discord;
 using Discord.Commands;
 using PKHeX.Core;
 using System;
@@ -10,7 +10,7 @@ namespace SysBot.Pokemon.Discord;
 public class OwnerModule<T> : SudoModule<T> where T : PKM, new()
 {
     [Command("addSudo")]
-    [Summary("Fügt erwähnten Benutzer zu globalem sudo hinzu")]
+    [Summary("Adds mentioned user to global sudo")]
     [RequireOwner]
     // ReSharper disable once UnusedParameter.Global
     public async Task SudoUsers([Remainder] string _)
@@ -18,11 +18,11 @@ public class OwnerModule<T> : SudoModule<T> where T : PKM, new()
         var users = Context.Message.MentionedUsers;
         var objects = users.Select(GetReference);
         SysCordSettings.Settings.GlobalSudoList.AddIfNew(objects);
-        await ReplyAsync("Erledigt.").ConfigureAwait(false);
+        await ReplyAsync("Done.").ConfigureAwait(false);
     }
 
     [Command("removeSudo")]
-    [Summary("Entfernt den erwähnten Benutzer aus dem globalen sudo")]
+    [Summary("Removes mentioned user from global sudo")]
     [RequireOwner]
     // ReSharper disable once UnusedParameter.Global
     public async Task RemoveSudoUsers([Remainder] string _)
@@ -30,73 +30,73 @@ public class OwnerModule<T> : SudoModule<T> where T : PKM, new()
         var users = Context.Message.MentionedUsers;
         var objects = users.Select(GetReference);
         SysCordSettings.Settings.GlobalSudoList.RemoveAll(z => objects.Any(o => o.ID == z.ID));
-        await ReplyAsync("Erledigt.").ConfigureAwait(false);
+        await ReplyAsync("Done.").ConfigureAwait(false);
     }
 
     [Command("addChannel")]
-    [Summary("Fügt einen Kanal in die Liste der Kanäle ein, die Befehle akzeptieren.")]
+    [Summary("Adds a channel to the list of channels that are accepting commands.")]
     [RequireOwner]
     // ReSharper disable once UnusedParameter.Global
     public async Task AddChannel()
     {
         var obj = GetReference(Context.Message.Channel);
-        SysCordSettings.Settings.ChannelWhitelist.AddIfNew(new[] { obj });
-        await ReplyAsync("Erledigt.").ConfigureAwait(false);
+        SysCordSettings.Settings.ChannelWhitelist.AddIfNew([obj]);
+        await ReplyAsync("Done.").ConfigureAwait(false);
     }
 
     [Command("removeChannel")]
-    [Summary("Entfernt einen Kanal aus der Liste der Kanäle, die Befehle akzeptieren.")]
+    [Summary("Removes a channel from the list of channels that are accepting commands.")]
     [RequireOwner]
     // ReSharper disable once UnusedParameter.Global
     public async Task RemoveChannel()
     {
         var obj = GetReference(Context.Message.Channel);
         SysCordSettings.Settings.ChannelWhitelist.RemoveAll(z => z.ID == obj.ID);
-        await ReplyAsync("Erledigt.").ConfigureAwait(false);
+        await ReplyAsync("Done.").ConfigureAwait(false);
     }
 
     [Command("leave")]
     [Alias("bye")]
-    [Summary("Verlässt den aktuellen Server.")]
+    [Summary("Leaves the current server.")]
     [RequireOwner]
     // ReSharper disable once UnusedParameter.Global
     public async Task Leave()
     {
-        await ReplyAsync("Auf Wiedersehen.").ConfigureAwait(false);
+        await ReplyAsync("Goodbye.").ConfigureAwait(false);
         await Context.Guild.LeaveAsync().ConfigureAwait(false);
     }
 
     [Command("leaveguild")]
     [Alias("lg")]
-    [Summary("Verlässt die Gilde anhand der angegebenen ID.")]
+    [Summary("Leaves guild based on supplied ID.")]
     [RequireOwner]
     // ReSharper disable once UnusedParameter.Global
     public async Task LeaveGuild(string userInput)
     {
         if (!ulong.TryParse(userInput, out ulong id))
         {
-            await ReplyAsync("Bitte legen Sie eine gültige Gilden-ID vor.").ConfigureAwait(false);
+            await ReplyAsync("Please provide a valid Guild ID.").ConfigureAwait(false);
             return;
         }
 
         var guild = Context.Client.Guilds.FirstOrDefault(x => x.Id == id);
         if (guild is null)
         {
-            await ReplyAsync($"Die gegebene Eingabe ({userInput}) ist keine gültige Gilden-ID oder der Bot ist nicht in der angegebenen Gilde.").ConfigureAwait(false);
+            await ReplyAsync($"Provided input ({userInput}) is not a valid guild ID or the bot is not in the specified guild.").ConfigureAwait(false);
             return;
         }
 
-        await ReplyAsync($"Verlassen von {guild}.").ConfigureAwait(false);
+        await ReplyAsync($"Leaving {guild}.").ConfigureAwait(false);
         await guild.LeaveAsync().ConfigureAwait(false);
     }
 
     [Command("leaveall")]
-    [Summary("Verlässt alle Server, auf denen sich der Bot gerade befindet.")]
+    [Summary("Leaves all servers the bot is currently in.")]
     [RequireOwner]
     // ReSharper disable once UnusedParameter.Global
     public async Task LeaveAll()
     {
-        await ReplyAsync("Alle Server werden verlassen.").ConfigureAwait(false);
+        await ReplyAsync("Leaving all servers.").ConfigureAwait(false);
         foreach (var guild in Context.Client.Guilds)
         {
             await guild.LeaveAsync().ConfigureAwait(false);
@@ -105,12 +105,12 @@ public class OwnerModule<T> : SudoModule<T> where T : PKM, new()
 
     [Command("sudoku")]
     [Alias("kill", "shutdown")]
-    [Summary("Beendet den gesamten Prozess selbst!")]
+    [Summary("Causes the entire process to end itself!")]
     [RequireOwner]
     // ReSharper disable once UnusedParameter.Global
     public async Task ExitProgram()
     {
-        await Context.Channel.EchoAndReply("Herunterfahren... auf Wiedersehen! **Bot-Dienste gehen offline.**").ConfigureAwait(false);
+        await Context.Channel.EchoAndReply("Shutting down... goodbye! **Bot services are going offline.**").ConfigureAwait(false);
         Environment.Exit(0);
     }
 
@@ -118,13 +118,13 @@ public class OwnerModule<T> : SudoModule<T> where T : PKM, new()
     {
         ID = channel.Id,
         Name = channel.Username,
-        Comment = $"Hinzugefügt durch {Context.User.Username} am {DateTime.Now:yyyy.MM.dd-hh:mm:ss}",
+        Comment = $"Added by {Context.User.Username} on {DateTime.Now:yyyy.MM.dd-hh:mm:ss}",
     };
 
     private RemoteControlAccess GetReference(IChannel channel) => new()
     {
         ID = channel.Id,
         Name = channel.Name,
-        Comment = $"Hinzugefügt durch {Context.User.Username} am {DateTime.Now:yyyy.MM.dd-hh:mm:ss}",
+        Comment = $"Added by {Context.User.Username} on {DateTime.Now:yyyy.MM.dd-hh:mm:ss}",
     };
 }

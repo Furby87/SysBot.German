@@ -10,9 +10,12 @@ using static SysBot.Pokemon.PokeDataOffsetsLA;
 
 namespace SysBot.Pokemon;
 
-public abstract class PokeRoutineExecutor8LA(PokeBotState Config) : PokeRoutineExecutor<PA8>(Config)
+public abstract class PokeRoutineExecutor8LA : PokeRoutineExecutor<PA8>
 {
     protected PokeDataOffsetsLA Offsets { get; } = new();
+    protected PokeRoutineExecutor8LA(PokeBotState Config) : base(Config)
+    {
+    }
 
     public override Task<PA8> ReadPokemon(ulong offset, CancellationToken token) => ReadPokemon(offset, BoxFormatSlotSize, token);
 

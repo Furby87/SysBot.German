@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -37,7 +39,7 @@ namespace SysBot.Pokemon.WinForms
                         return titleAttribute.Title;
                     }
                 }
-                return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
+                return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location);
             }
         }
 
@@ -101,10 +103,105 @@ namespace SysBot.Pokemon.WinForms
             }
         }
         #endregion
-
+        // OK-Button Clickaction
         private void okButton_Click(object sender, EventArgs e)
         {
+            Close();    // Close Form
+        }
+        // Button Linktree clickaction
+        private void btn_linktree_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // URL der Webseite angeben
+                string urllinktree = "https://www.linktr.ee/furby87";
+
+                // Befehl für die Ausführung von 'start' über 'cmd.exe'
+                string command = $"/c start {urllinktree}";
+
+                // Prozess starten
+                Process.Start("cmd.exe", command);
+            }
+            catch (Exception ex)
+            {   // Show Messagebox for Error
+                MessageBox.Show("Fehler beim Öffnen der Webseite: " + ex.Message);
+                Close();    // Close Form
+                return;
+            }
+        }
+        // Button Twitch Clickaction
+        private void btn_Twitch_Click(object sender, EventArgs e)
+        {
+            /* ERROR-Method
+
+            try
+            {
+                // URL der Webseite angeben
+                string urltwitch = "https://www.twitch.tv/furby1987";
+                // Starte Prozess (URL)
+                Process.Start(urltwitch);
+            }
+            // catch exeptions
+            catch (Exception ex)
+            {
+                // Show Messagebox for Erroroi
+                MessageBox.Show("Fehler beim Öffnen der Webseite: " + ex.Message);
+                // Close Form
+                Close();
+                return;
+            }
+            */
+
+            try
+            {
+                // URL der Webseite angeben
+                string urltwitch = "https://www.twitch.tv/furby1987";
+
+                // Befehl für die Ausführung von 'start' über 'cmd.exe'
+                string command = $"/c start {urltwitch}";
+
+                // Prozess starten
+                Process.Start("cmd.exe", command);
+            }
+            catch (Exception ex)
+            {   // Show Messagebox for Error
+                MessageBox.Show("Fehler beim Öffnen der Webseite: " + ex.Message);
+                Close();    // Close Form
+                return;
+            }
+
+        }
+        // Button Discord Clickaction
+        private void btn_discord_Click(object sender, EventArgs e)
+        {
+            // URL der Webseite angeben
+            string urldiscord = "https://www.discord.gg/MzVM8DVM9w#";
+            try
+                /*  ERROR Method
+            {
+                Process.Start(urldiscord);
+            }   // catch exceptions
+            catch (Exception ex)
+            {   // Show Messagebox for Error
+                MessageBox.Show("Fehler beim Öffnen der Webseite: " + ex.Message);
+            }
+            // close form
             Close();
+            */
+
+            {
+                // Befehl für die Ausführung von 'start' über 'cmd.exe'
+                string command = $"/c start {urldiscord}";
+
+                // Prozess starten
+                Process.Start("cmd.exe", command);
+            }
+            catch (Exception ex)
+            {   // Show Messagebox for Error
+                MessageBox.Show("Fehler beim Öffnen der Webseite: " + ex.Message);
+                Close();    // Close Form
+                return;
+            }
         }
     }
 }

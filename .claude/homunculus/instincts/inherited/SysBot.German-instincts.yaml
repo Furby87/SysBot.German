@@ -1,0 +1,499 @@
+# Instincts generated from https://github.com/Furby87/SysBot.German
+# Generated: 2026-07-13T14:57:15.760Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: SysBot.German-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/Furby87/SysBot.German
+---
+
+# SysBot.German Commit Length
+
+## Action
+
+Keep commit messages concise (~38 characters)
+
+## Evidence
+
+- Average commit message length: 38 chars
+- Based on 76 commits
+
+---
+id: SysBot.German-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/Furby87/SysBot.German
+---
+
+# SysBot.German Naming Files
+
+## Action
+
+Use PascalCase naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: PascalCase
+
+---
+id: SysBot.German-import-relative
+trigger: "when importing modules"
+confidence: 0.75
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/Furby87/SysBot.German
+---
+
+# SysBot.German Import Relative
+
+## Action
+
+Use relative imports for project files
+
+## Evidence
+
+- Import analysis shows relative import pattern
+- Example: import { x } from '../lib/x'
+
+---
+id: SysBot.German-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/Furby87/SysBot.German
+---
+
+# SysBot.German Export Style
+
+## Action
+
+Prefer named exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: named
+
+---
+id: SysBot.German-test-naming
+trigger: "when creating a test file"
+confidence: 0.85
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/Furby87/SysBot.German
+---
+
+# SysBot.German Test Naming
+
+## Action
+
+Name test files using the pattern: *Tests.cs
+
+## Evidence
+
+- File pattern: *Tests.cs
+- Consistent across test files
+
+---
+id: SysBot.German-workflow-feature-development
+trigger: "when implementing a new feature"
+confidence: 0.7
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/Furby87/SysBot.German
+---
+
+# SysBot.German Workflow Feature Development
+
+## Action
+
+Follow the feature-development workflow:
+1. Add feature implementation
+2. Add tests for feature
+3. Update documentation
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~4x per month
+- Files: **/*.test.*
+
+---
+id: SysBot.German-workflow-update-dependencies
+trigger: "when doing update dependencies"
+confidence: 0.55
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/Furby87/SysBot.German
+---
+
+# SysBot.German Workflow Update Dependencies
+
+## Action
+
+Follow the update-dependencies workflow:
+1. Update all *.csproj files for each platform (Discord, Twitch, WinForms, YouTube, Z3, Base, Tests, etc.)
+2. Replace DLLs in deps/ (e.g., PKHeX.Core.AutoMod.dll, PKHeX.Drawing.dll, PKHeX.Drawing.PokeSprite.dll)
+3. Optionally update helper files if dependency APIs changed (e.g., AutoLegalityWrapper.cs)
+4. Commit with a message indicating the new dependency version
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~1x per month
+- Files: SysBot.Pokemon.Discord/SysBot.Pokemon.Discord.csproj, SysBot.Pokemon.Twitch/SysBot.Pokemon.Twitch.csproj, SysBot.Pokemon.WinForms/SysBot.Pokemon.WinForms.csproj
+
+---
+id: SysBot.German-workflow-update-alm-or-pkhex-dll-only
+trigger: "when doing update alm or pkhex dll only"
+confidence: 0.55
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/Furby87/SysBot.German
+---
+
+# SysBot.German Workflow Update Alm Or Pkhex Dll Only
+
+## Action
+
+Follow the update-alm-or-pkhex-dll-only workflow:
+1. Replace PKHeX.Core.AutoMod.dll (and sometimes PKHeX.Drawing.dll) in the deps/ folder
+2. Commit with a message referencing the ALM/PKHeX update
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~1x per month
+- Files: SysBot.Pokemon/deps/PKHeX.Core.AutoMod.dll, SysBot.Pokemon.WinForms/deps/PKHeX.Drawing.dll, SysBot.Pokemon.WinForms/deps/PKHeX.Drawing.PokeSprite.dll
+
+---
+id: SysBot.German-workflow-multi-bot-tradebot-fix
+trigger: "when doing multi bot tradebot fix"
+confidence: 0.55
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/Furby87/SysBot.German
+---
+
+# SysBot.German Workflow Multi Bot Tradebot Fix
+
+## Action
+
+Follow the multi-bot-tradebot-fix workflow:
+1. Edit PokeTradeBotBS.cs, PokeTradeBotLA.cs, PokeTradeBotSV.cs, and PokeTradeBotSWSH.cs
+2. Optionally update related helpers or notifier files
+3. Commit with a message referencing trade or species logic
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~1x per month
+- Files: SysBot.Pokemon/BDSP/BotTrade/PokeTradeBotBS.cs, SysBot.Pokemon/LA/BotTrade/PokeTradeBotLA.cs, SysBot.Pokemon/SV/BotTrade/PokeTradeBotSV.cs
+
+---
+id: SysBot.German-workflow-winforms-ui-main-designer-update
+trigger: "when doing winforms ui main designer update"
+confidence: 0.55
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/Furby87/SysBot.German
+---
+
+# SysBot.German Workflow Winforms Ui Main Designer Update
+
+## Action
+
+Follow the winforms-ui-main-designer-update workflow:
+1. Edit Main.Designer.cs (and sometimes Main.cs, Main.resx)
+2. Optionally update related WinForms controls or config files
+3. Commit with a message referencing UI, design, or window
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~1x per month
+- Files: SysBot.Pokemon.WinForms/Main.Designer.cs, SysBot.Pokemon.WinForms/Main.cs, SysBot.Pokemon.WinForms/Main.resx
+
+---
+id: sysbot.german-instinct-naming-files
+trigger: "When creating or renaming a file"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: Furby87/SysBot.German
+---
+
+# Sysbot.german Instinct Naming Files
+
+## Action
+
+Use PascalCase for file names
+
+## Evidence
+
+- Pattern in files: SysBot.Pokemon/Settings/StopConditionSettings.cs
+- SysBot.Pokemon.WinForms/Main.Designer.cs
+
+---
+id: sysbot.german-instinct-naming-functions
+trigger: "When defining a function"
+confidence: 0.85
+domain: code-style
+source: repo-analysis
+source_repo: Furby87/SysBot.German
+---
+
+# Sysbot.german Instinct Naming Functions
+
+## Action
+
+Use camelCase for function names
+
+## Evidence
+
+- Pattern in C# code conventions
+- Consistent with C# community standards
+
+---
+id: sysbot.german-instinct-naming-classes
+trigger: "When defining a class"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: Furby87/SysBot.German
+---
+
+# Sysbot.german Instinct Naming Classes
+
+## Action
+
+Use PascalCase for class names
+
+## Evidence
+
+- Pattern in files: PokeTradeBotBS.cs, PokeTradeBotLA.cs, etc.
+
+---
+id: sysbot.german-instinct-naming-constants
+trigger: "When declaring a constant"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: Furby87/SysBot.German
+---
+
+# Sysbot.german Instinct Naming Constants
+
+## Action
+
+Use SCREAMING_SNAKE_CASE for constant names
+
+## Evidence
+
+- Pattern in codeStyle.namingConventions.constants
+
+---
+id: sysbot.german-instinct-imports
+trigger: "When importing modules or namespaces"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: Furby87/SysBot.German
+---
+
+# Sysbot.german Instinct Imports
+
+## Action
+
+Use relative import paths
+
+## Evidence
+
+- Pattern in codeStyle.importStyle: relative
+
+---
+id: sysbot.german-instinct-exports
+trigger: "When exporting classes or functions"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: Furby87/SysBot.German
+---
+
+# Sysbot.german Instinct Exports
+
+## Action
+
+Use named exports
+
+## Evidence
+
+- Pattern in codeStyle.exportStyle: named
+
+---
+id: sysbot.german-instinct-test-naming
+trigger: "When creating a test file"
+confidence: 0.85
+domain: testing
+source: repo-analysis
+source_repo: Furby87/SysBot.German
+---
+
+# Sysbot.german Instinct Test Naming
+
+## Action
+
+Name the file with the pattern *Tests.cs
+
+## Evidence
+
+- Pattern in testing.filePattern: *Tests.cs
+- Files like SysBot.Tests/SysBot.Tests.csproj
+
+---
+id: sysbot.german-instinct-test-type
+trigger: "When writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: Furby87/SysBot.German
+---
+
+# Sysbot.german Instinct Test Type
+
+## Action
+
+Write unit tests
+
+## Evidence
+
+- testing.testTypes includes 'unit'
+
+---
+id: sysbot.german-instinct-commit-message-format
+trigger: "When writing a commit message"
+confidence: 0.85
+domain: git
+source: repo-analysis
+source_repo: Furby87/SysBot.German
+---
+
+# Sysbot.german Instinct Commit Message Format
+
+## Action
+
+Use a short, freeform message describing the change (e.g., 'Update dependencies to 24.7.3')
+
+## Evidence
+
+- commits.examples: 'Update dependencies to 24.7.3', 'Fix incorrect EC comparison'
+
+---
+id: sysbot.german-instinct-commit-length
+trigger: "When writing a commit message"
+confidence: 0.8
+domain: git
+source: repo-analysis
+source_repo: Furby87/SysBot.German
+---
+
+# Sysbot.german Instinct Commit Length
+
+## Action
+
+Keep the commit message concise (average length ~38 characters)
+
+## Evidence
+
+- commits.averageLength: 38
+
+---
+id: sysbot.german-instinct-update-dependencies
+trigger: "When someone wants to update third-party libraries and dependencies to new versions"
+confidence: 0.98
+domain: workflow
+source: repo-analysis
+source_repo: Furby87/SysBot.German
+---
+
+# Sysbot.german Instinct Update Dependencies
+
+## Action
+
+Update all *.csproj files and DLLs in deps/, optionally update helper files, then commit with a message indicating the new dependency version
+
+## Evidence
+
+- WORKFLOWS: update-dependencies
+- commits: 'Update dependencies to 24.11.11'
+
+---
+id: sysbot.german-instinct-update-alm-or-pkhex-dll-only
+trigger: "When someone wants to pull in a hotfix or minor update from ALM/PKHeX without a full dependency bump"
+confidence: 0.92
+domain: workflow
+source: repo-analysis
+source_repo: Furby87/SysBot.German
+---
+
+# Sysbot.german Instinct Update Alm Or Pkhex Dll Only
+
+## Action
+
+Replace PKHeX.Core.AutoMod.dll (and sometimes PKHeX.Drawing.dll) in the deps/ folder and commit with a message referencing the ALM/PKHeX update
+
+## Evidence
+
+- WORKFLOWS: update-alm-or-pkhex-dll-only
+- commits: 'Update ALM for sets without specified gender'
+
+---
+id: sysbot.german-instinct-multi-bot-tradebot-fix
+trigger: "When someone wants to fix or enhance trade logic for all supported games at once"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: Furby87/SysBot.German
+---
+
+# Sysbot.german Instinct Multi Bot Tradebot Fix
+
+## Action
+
+Edit all PokeTradeBot classes (BDSP, LA, SV, SWSH), optionally update helpers, and commit with a message referencing trade or species logic
+
+## Evidence
+
+- WORKFLOWS: multi-bot-tradebot-fix
+- Files: PokeTradeBotBS.cs, PokeTradeBotLA.cs, etc.
+
+---
+id: sysbot.german-instinct-winforms-ui-main-designer-update
+trigger: "When someone wants to update or fix the main application window's layout or behavior"
+confidence: 0.88
+domain: workflow
+source: repo-analysis
+source_repo: Furby87/SysBot.German
+---
+
+# Sysbot.german Instinct Winforms Ui Main Designer Update
+
+## Action
+
+Edit Main.Designer.cs (and sometimes Main.cs, Main.resx), optionally update related controls or config files, and commit with a message referencing UI, design, or window
+
+## Evidence
+
+- WORKFLOWS: winforms-ui-main-designer-update
+- Files: Main.Designer.cs, Main.cs, Main.resx
+
